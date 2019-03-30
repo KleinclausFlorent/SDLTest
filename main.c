@@ -97,7 +97,11 @@ int main( int argc, char* args[] )
 	return 0;
 }
 
-
+/*
+BUT : Initialisation de la SDL, instanciation des structures game qui gère la fenêtre SDL, font qui contient la police utilisée pour écrire sur l'écran
+ENTREE : Le titre de la fenêtre SDL sa position dans windows en x , y , sa largeur, sa hauteur, sa visibilité et les structures à initialiser
+SORTIE : Fenêtre ouverte et initialisée
+*/
 int init(char *title, int xpos,int ypos,int height, int width,int flags,game *myGame, font *mFont){
 
 
@@ -147,6 +151,11 @@ int init(char *title, int xpos,int ypos,int height, int width,int flags,game *my
 
 }
 
+/*
+But : Récupère les events ( clic souris, fermeture fenêtre avec la croix, touche clavier etc
+Entrée : le gameState qui contient la variable de la boucle jeu
+Sortie : Ce qu'on décide de faire en fonction de l'événement qui a lieu
+*/
 void handleEvents(gameState *state){
 
 
@@ -167,6 +176,8 @@ void handleEvents(gameState *state){
                             break;
 
         case SDL_KEYUP:;break;
+        case SDL_MOUSEBUTTONUP: /* Clic de la souris */
+            printf("\n x = %i  y = %i",event.button.x,event.button.y);
 
         default:break;
 
@@ -175,6 +186,12 @@ void handleEvents(gameState *state){
 
 
 }
+
+/*
+But : dessiner des images dessiner un sprite à partir d'une asset
+Entrée : La structure game qui gère la fenêtre SDL et gamestate ( PAS ENCORE MAIS SOON ) Coordonnée de l'image
+Sortie : Image affichée à l'endroit voulu
+*/
 void cutBitmapTexture(game *myGame,gameState state){
 
         SDL_Rect rectangleDest;
@@ -240,6 +257,11 @@ void cutBitmapTexture(game *myGame,gameState state){
 
 }
 
+/*
+BUT : Ecrire du texte sur la fenêtre
+ENTREE : Struct game et Font (SOON) Ajout de la position en entrée pour afficher le texte où on veut
+SORTIE : Texte affiché à l'écran
+*/
 void writeSDL(game *myGame,font mFont) {
 
 
@@ -282,6 +304,8 @@ void writeSDL(game *myGame,font mFont) {
 
 
 }
+
+//DESTRUCTEURS
 void destroy(game *myGame){
 
     //Destroy render
